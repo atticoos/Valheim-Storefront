@@ -25,30 +25,27 @@ namespace JotunnModStub
             Player currentPlayer = Player.m_localPlayer;
             List<Container> containers = GetCashRegisters();
 
-            List<ItemDrop.ItemData> coinStacks = currentPlayer.GetInventory().GetAllItems().FindAll(item =>
-            {
-                return item.m_dropPrefab.name == "Coins";
-            });
+            List<ItemDrop.ItemData> coinStacks = currentPlayer.GetInventory().GetAllItems()
+                .FindAll(item => item.m_dropPrefab.name == "Coins");
 
-            if (coinStacks.Count <= 0)
-            {
+            if (coinStacks.Count <= 0) {
                 return false;
             }
 
-            foreach (Container container in containers)
-            {
+            foreach (Container container in containers) {
                 var transferred = container.GetInventory().MoveItemToThis(
                     currentPlayer.GetInventory(),
                     coinStacks[0],
-                    10,
+                    10, // TODO: Transfer actual coin price
                     1,
                     1
                 );
-                if (transferred)
-                {
+
+                if (transferred) {
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -59,16 +56,14 @@ namespace JotunnModStub
             Piece.GetAllPiecesInRadius(position, 30f, nearbyPieces);
 
             List<Container> nearbyContainers = new List<Container>();
-            foreach (Piece piece in nearbyPieces)
-            {
-                if (piece.TryGetComponent<Container>(out Container container))
-                {
-                    if(StorefrontPieces.IsCashRegisterPiece(container.m_piece))
-                    {
+
+            nearbyPieces.ForEach(piece => {
+                if (piece.TryGetComponent<Container>(out Container container)) {
+                    if (StorefrontPieces.IsCashRegisterPiece(container.m_piece)) {
                         nearbyContainers.Add(container);
                     }
                 }
-            }
+            });
             return nearbyContainers;
         }
     }

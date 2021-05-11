@@ -63,6 +63,15 @@ namespace JotunnModStub
                 return false;
             }
         }
+
+        public void OnUpdate()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
+            {
+                StoreManager.GetInstance().ClosePointOfSale();
+            }
+        }
+
         public void OnDestroy()
         {
             harmony.UnpatchSelf();
