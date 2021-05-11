@@ -50,7 +50,7 @@ namespace JotunnModStub
             {
                 if (piece.TryGetComponent<Container>(out Container container))
                 {
-                    if (container.m_piece.m_name == "Storefront - Inventory")
+                    if (StorefrontPieces.IsInventoryPiece(container.m_piece))
                     {
                         nearbyContainers.Add(container);
                     }

@@ -44,6 +44,16 @@ namespace JotunnModStub
             return piece.m_name == "Storefront - Point of Sale";
         }
 
+        public static bool IsInventoryPiece(Piece piece)
+        {
+            return piece.m_name == "Storefront - Inventory";
+        }
+
+        public static bool IsCashRegisterPiece(Piece piece)
+        {
+            return piece.m_name == "Storefront - Cash Register";
+        }
+
         private static void InitializePiece(String key, String name, String desc)
         {
             CustomPiece CP = new CustomPiece(key, "piece_chest_wood", "Hammer");
